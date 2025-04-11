@@ -8,3 +8,4 @@ gensim
 scipy
 plotly
 nltk
+scikit-surprise
