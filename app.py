@@ -2,6 +2,12 @@
 import re
 import warnings
 
+# Download NLTK data
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
 # Third-party imports
 import streamlit as st
 import pandas as pd
