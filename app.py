@@ -7,6 +7,7 @@ import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
+nltk.download('punkt_tab')  # Add this line
 
 # Third-party imports
 import streamlit as st
