@@ -21,11 +21,13 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+# Replace the existing try-except block
 try:
     from surprise import Dataset, Reader, SVD
 except ImportError:
     import sys
     import subprocess
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', 'numpy==1.24.3'])
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise==1.1.3'])
     from surprise import Dataset, Reader, SVD
 from sklearn.feature_extraction.text import TfidfVectorizer
