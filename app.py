@@ -118,12 +118,44 @@ def display_product(product):
                 pass
 
 @st.cache_data
+def preprocess_all_descriptions(df):
+    """Pre-process all product descriptions at once"""
+    return df['description'].apply(lambda x: preprocess_string(str(x).lower()))
+
+@st.cache_data
+def create_tfidf_matrix(processed_descriptions):
+    """Create TF-IDF matrix once"""
+    vectorizer = TfidfVectorizer()
+    return vectorizer.fit_transform(processed_descriptions)
+
+@st.cache_data
+def train_svd_model(ratings_data):
+    """Train SVD model once"""
+    reader = Reader(rating_scale=(0, 5))
+    data = Dataset.load_from_df(ratings_data[['user_id', 'product_id', 'rating']], reader)
+    algo = SVD(n_factors=50, n_epochs=20, random_state=42)
+    algo.fit(data.build_full_trainset())
+    return algo
+
+# Modify load_data() to include preprocessing
+@st.cache_data
 def load_data():
     products_df = pd.read_csv('cleaned_product_data.csv')
     ratings_df = pd.read_csv('cleaned_rating_data.csv')
-    return products_df, ratings_df
+    
+    # Pre-process descriptions
+    products_df['processed_description'] = preprocess_all_descriptions(products_df)
+    
+    # Create TF-IDF matrix
+    tfidf_matrix = create_tfidf_matrix(products_df['processed_description'])
+    
+    # Train SVD model
+    svd_model = train_svd_model(ratings_df)
+    
+    return products_df, ratings_df, tfidf_matrix, svd_model
 
-products_df, ratings_df = load_data()
+# Update data loading
+products_df, ratings_df, tfidf_matrix, svd_model = load_data()
 
 with st.sidebar:
     st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Shopee.svg/2560px-Shopee.svg.png", width=200)
@@ -416,6 +448,7 @@ elif choice == 'Gợi Ý Theo Nội Dung':
                                 except:
                                     pass
 
+                        # In 'Gợi Ý Theo Nội Dung' section, replace the content-based recommendation code:
                         if st.button("🔍 Xem Gợi Ý Sản Phẩm Tương Tự", use_container_width=True):
                             with st.spinner('Đang tìm kiếm sản phẩm tương tự...'):
                                 products_df['processed_description'] = products_df['description'].apply(
