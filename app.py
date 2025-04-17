@@ -21,7 +21,13 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from surprise import Dataset, Reader, SVD
+try:
+    from surprise import Dataset, Reader, SVD
+except ImportError:
+    import sys
+    import subprocess
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise==1.1.3'])
+    from surprise import Dataset, Reader, SVD
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
