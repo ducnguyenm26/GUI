@@ -1,27 +1,32 @@
 # Standard library imports
 import re
 import warnings
+import sys
 
 # Initialize numpy first
 import numpy
-import numpy.core.multiarray
+numpy.import_array()
+numpy._import_array()
 import numpy as np
 
-# Third-party imports
+# Third-party imports (reordered)
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
+
+# Initialize streamlit after numpy
 import streamlit as st
 
-# Download NLTK data
+# Download and initialize NLTK
 import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
+nltk.data.path.append(str(sys.path[0]))
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
 
-# NLTK imports
+# NLTK imports after downloads
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -30,8 +35,6 @@ from nltk.stem import WordNetLemmatizer
 try:
     from surprise import Dataset, Reader, SVD
 except ImportError:
-    import sys
-    import subprocess
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', 'numpy==1.21.6'])
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise==1.1.1'])
     from surprise import Dataset, Reader, SVD
