@@ -2,12 +2,12 @@
 import re
 import warnings
 
-# Initialize numpy first (modified)
+# Initialize numpy first
 import numpy
-numpy.import_array()
+import numpy.core.multiarray
 import numpy as np
 
-# Third-party imports (reordered)
+# Third-party imports
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
