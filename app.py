@@ -2,17 +2,18 @@
 import re
 import warnings
 
-# Initialize numpy first
+# Initialize numpy first (modified)
+import numpy
+numpy.import_array()
 import numpy as np
-np._import_array()
 
-# Third-party imports
+# Third-party imports (reordered)
 import pandas as pd
-import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
+import streamlit as st
 
 # Download NLTK data
 import nltk
