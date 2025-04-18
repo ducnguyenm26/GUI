@@ -5,9 +5,8 @@ import sys
 import subprocess
 
 # Initialize numpy first with proper array support
-import numpy
-numpy.core.multiarray
 import numpy as np
+from numpy.core import multiarray
 
 # Third-party imports
 import pandas as pd
@@ -37,12 +36,10 @@ from nltk.stem import WordNetLemmatizer
 
 # Install and import Surprise
 try:
-    import numpy.core.multiarray
     from surprise import Dataset, Reader, SVD
 except ImportError:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', 'numpy>=1.23.0'])
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'numpy==1.23.0'])
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise'])
-    import numpy.core.multiarray
     from surprise import Dataset, Reader, SVD
 
 from sklearn.feature_extraction.text import TfidfVectorizer
