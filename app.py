@@ -4,7 +4,9 @@ import warnings
 import sys
 import subprocess
 
-# Initialize numpy first
+# Initialize numpy first with proper array support
+import numpy
+numpy.core.multiarray
 import numpy as np
 
 # Third-party imports
@@ -33,12 +35,14 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Install and import Surprise with proper numpy initialization
+# Install and import Surprise
 try:
+    import numpy.core.multiarray
     from surprise import Dataset, Reader, SVD
 except ImportError:
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', 'numpy>=1.23.0'])
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise'])
+    import numpy.core.multiarray
     from surprise import Dataset, Reader, SVD
 
 from sklearn.feature_extraction.text import TfidfVectorizer
