@@ -4,35 +4,37 @@ import warnings
 
 # Initialize numpy first
 import numpy as np
-np.import_array()
+np._import_array()
+
+# Third-party imports
+import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+import plotly.graph_objects as go
 
 # Download NLTK data
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
-nltk.download('punkt_tab')
 
-# Third-party imports
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-import plotly.graph_objects as go
-import nltk
+# NLTK imports
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-# Replace the existing try-except block
+
+# Surprise and sklearn imports
 try:
     from surprise import Dataset, Reader, SVD
 except ImportError:
     import sys
     import subprocess
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', 'numpy==1.24.3'])
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise==1.1.3'])
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', 'numpy==1.21.6'])
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise==1.1.1'])
     from surprise import Dataset, Reader, SVD
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
