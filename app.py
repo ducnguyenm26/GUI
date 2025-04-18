@@ -5,6 +5,8 @@ import sys
 import subprocess
 
 # Initialize numpy first with proper array support
+import numpy
+numpy._import_array()
 import numpy as np
 
 # Third-party imports
