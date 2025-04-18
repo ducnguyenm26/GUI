@@ -2,41 +2,42 @@
 import re
 import warnings
 import sys
+import subprocess
 
-# Initialize numpy first
-import numpy
-numpy.import_array()
-numpy._import_array()
+# Initialize numpy first (modified)
 import numpy as np
 
-# Third-party imports (reordered)
+# Third-party imports
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
-
-# Initialize streamlit after numpy
 import streamlit as st
 
-# Download and initialize NLTK
-import nltk
-nltk.data.path.append(str(sys.path[0]))
-nltk.download('punkt', quiet=True)
-nltk.download('stopwords', quiet=True)
-nltk.download('wordnet', quiet=True)
+# Install and import NLTK
+try:
+    import nltk
+    nltk.download('punkt', quiet=True)
+    nltk.download('stopwords', quiet=True)
+    nltk.download('wordnet', quiet=True)
+except ImportError:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'nltk'])
+    import nltk
+    nltk.download('punkt', quiet=True)
+    nltk.download('stopwords', quiet=True)
+    nltk.download('wordnet', quiet=True)
 
-# NLTK imports after downloads
+# NLTK imports
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Surprise and sklearn imports
+# Install and import Surprise
 try:
     from surprise import Dataset, Reader, SVD
 except ImportError:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', 'numpy==1.21.6'])
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise==1.1.1'])
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise'])
     from surprise import Dataset, Reader, SVD
 
 from sklearn.feature_extraction.text import TfidfVectorizer
