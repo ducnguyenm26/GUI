@@ -2,17 +2,20 @@
 import re
 import warnings
 
+# Initialize numpy first
+import numpy as np
+np.import_array()
+
 # Download NLTK data
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
-nltk.download('punkt_tab')  # Add this line
+nltk.download('punkt_tab')
 
 # Third-party imports
 import streamlit as st
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
