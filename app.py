@@ -4,7 +4,7 @@ import warnings
 import sys
 import subprocess
 
-# Initialize numpy first (modified)
+# Initialize numpy first
 import numpy as np
 
 # Third-party imports
@@ -33,10 +33,11 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Install and import Surprise
+# Install and import Surprise with proper numpy initialization
 try:
     from surprise import Dataset, Reader, SVD
 except ImportError:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', 'numpy>=1.23.0'])
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'scikit-surprise'])
     from surprise import Dataset, Reader, SVD
 
