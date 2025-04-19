@@ -4,9 +4,11 @@ import warnings
 import sys
 import subprocess
 
-# Initialize numpy and other data science libraries
+# Initialize numpy first
 import numpy as np
-from numpy.core import multiarray
+import numpy.core.multiarray
+
+# Other data science libraries
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
