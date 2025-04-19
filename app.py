@@ -4,12 +4,9 @@ import warnings
 import sys
 import subprocess
 
-# Initialize numpy first with proper array support
-import numpy
-numpy._import_array()
+# Initialize numpy and other data science libraries
 import numpy as np
-
-# Third-party imports
+from numpy.core import multiarray
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
